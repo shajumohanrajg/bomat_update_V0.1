@@ -13,11 +13,12 @@ import {
   MenuItem,
   Divider,
   Button,
-  Box,
+  Box,Breadcrumbs,Link
  } from '@mui/material';
 // components
 import Page from '../../components/Page';
 import EditionTable from '../Edition/editionTable';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,15 @@ import EditionTable from '../Edition/editionTable';
 // ----------------------------------------------------------------------
 
 const Edition = ()=>{
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Edition
+    </Typography>,
+  ];
   const {enqueueSnackbar} = useSnackbar();
   // const [tableData, setTableData] = React.useState([]);
   const [editionCheck,setEditionCheck] = React.useState([]);
@@ -172,9 +182,15 @@ const Edition = ()=>{
   
       <Page title="Poorvika | Edition | Mapping">
         <Box sx={{boxShadow:20,padding:5,}}>
-        <div className="edition_head">
-          <Typography variant="h4">Edition Mapping</Typography>
-        </div>
+       
+          <Typography variant="h5" sx={{paddingBottom:3}}>Edition Mapping</Typography>
+        
+        <Breadcrumbs sx={{ paddingBottom:3 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs> 
         {/* <Container> */}
           {/* <ContentStyle sx={{ textAlign: 'center', alignItems: 'center' }}>
             <Typography variant="h3" paragraph>

@@ -1,4 +1,4 @@
-import { Box,  Typography,IconButton} from "@mui/material";
+import { Box,  Typography,IconButton,Breadcrumbs,Link} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 import React, { useState, useEffect } from "react";
@@ -13,6 +13,7 @@ import axios from "axios";
 import { createBrowserHistory } from 'history';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
 const history = createBrowserHistory();
@@ -34,7 +35,15 @@ const style = {
 
   
 const Contacts = () => {
-   
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Bomat
+    </Typography>,
+  ];
   //const {enqueueSnackbar} = useSnackbar();
   const [matList, setMatList] = useState([]);
   //const [matList1, setMatList1] = useState([]);
@@ -62,7 +71,7 @@ const Contacts = () => {
     
       const updateVendor = (id) => {
         // console.log(id) 
-        history.push(`/bomat_update4/${id}`)
+        history.push(`/dashboard/bomat_update4/${id}`)
         window.location.reload();
         
       }
@@ -71,11 +80,11 @@ const Contacts = () => {
    
     {
       field: "material_code",
-      valueFormatter: ({value}) => value,
-      headerName: "Material Code",
-     
+      valueFormatter: ({value}) => 'M' +value,
+      headerName: "M Code",
+      cellClassName: 'super-app-theme--cell',
       headerClassName: 'super-app-theme--header',
-      flex: 0.4,
+      flex: 0.2,
       // cellClassName: "name-column--cell",
 
     },
@@ -106,6 +115,7 @@ const Contacts = () => {
       }, 
       {
         headerName: "Actions", field: "action", flex:1,
+        headerClassName: 'super-app-theme--header',
         renderCell: (params) => <div>
             <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
   <EditIcon fontSize="small" />
@@ -142,6 +152,12 @@ const Contacts = () => {
        
       <Typography variant="h5" color="initial"><Box sx={{ fontWeight: 'bold', m: 1 }}>Bill of Materials Table</Box></Typography>
        </Stack>
+       <Breadcrumbs sx={{  m: 1 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs> 
       <Box
        height="80vh"  fontWeight={10}
         sx={{ 
@@ -150,6 +166,17 @@ const Contacts = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
+          },
+          '& .super-app-theme--cell': {
+            //backgroundColor: 'primary',
+            color: '#1a3e72',
+            fontWeight: '600',
+          },
+          '& .super-app-theme--header': {
+           // backgroundColor: 'rgba(157, 255, 118, 0.49)',
+            //color: '#1a3e72',
+            fontWeight: '600',
+           
           },
           "& .name-column--cell": {
          
@@ -173,8 +200,10 @@ const Contacts = () => {
     
         
       >  <Stack direction="row" justifyContent="end" >
-  
-              <Button variant="contained" href="/bomat" color="success" sx={{fontWeight:"bold"}} >Add Items</Button>
+    <Button variant="contained" color="primary" href="/dashboard/bomat_add">
+    Add Items
+        </Button>
+              
               </Stack>
   
    

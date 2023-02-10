@@ -49,7 +49,7 @@ export default function Navbar({ onOpenSidebar }) {
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
-        <Searchbar />
+        {/*<Searchbar />*/}
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack

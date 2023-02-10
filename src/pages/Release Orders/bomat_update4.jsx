@@ -111,13 +111,13 @@ const RAdd = () => {
           anchorOrigin: { horizontal: "right", vertical: "top" },
         });
         console.log(response);
-        history.push("/dashboard/bomat_table");
+       history.push("/dashboard/bomat_table1");
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       },
       (error) => {
-        enqueueSnackbar("Check Data and Try Again", {
+        enqueueSnackbar("Please fill all fields", {
           variant: "Error",
           anchorOrigin: { horizontal: "right", vertical: "top" },
         });
@@ -180,12 +180,12 @@ const RAdd = () => {
               <Grid item xs={12} md={12} xl={12}>
          
                 <InputLabel htmlFor="material_type">Material Type</InputLabel>
-                <Select
+                <TextField
                 
                   fullWidth
                   value={vendorValue}
                   id="material_type"
-                  autoComplete="on"
+                 select
                   onChange={(e) => setVendorValue(e.target.value)}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
@@ -198,11 +198,23 @@ const RAdd = () => {
                       {option.id} - {option.name}
                     </MenuItem>
                   ))}
-                </Select>
+                </TextField>
+               
+              </Grid>
+              <Grid item xs={12} md={6} xl={6}>
+                <InputLabel htmlFor="material_type">Material</InputLabel>
+                <TextField
+                  fullWidth
+                  id="material_type"
+                  type="text"
+                  value={matData.material_type}
+                  onChange={(e) => handleChange(e)}
+                  variant="outlined" disabled
+                />
               </Grid>
 
               <Grid item xs={12} md={6} xl={6}>
-                <InputLabel htmlFor="material_type">Material</InputLabel>
+                <InputLabel htmlFor="material">Material</InputLabel>
                 <TextField
                   fullWidth
                   id="material"

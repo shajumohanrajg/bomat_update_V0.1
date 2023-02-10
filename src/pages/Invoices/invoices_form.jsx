@@ -8,9 +8,10 @@ import {
   TextField,
   Container,
   Typography,
-  InputAdornment,
+  InputAdornment,Breadcrumbs,Link 
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Page from "../../components/Page";
 import Axios from "axios";
 import { SnackbarProvider,useSnackbar } from 'notistack';
@@ -19,7 +20,24 @@ import PercentIcon from '@mui/icons-material/Percent';
 
 
 const IAdd = () => {
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>,
+    <Link
+    underline="hover"
+    key="2"
+    color="inherit"
+    href="/dashboard/po"
+    
+  >
+    PO
+  </Link>,
 
+    <Typography key="3" color="text.primary">
+     Purchase Order Form
+    </Typography>,
+  ];
   const {enqueueSnackbar} = useSnackbar();
   const history= createBrowserHistory();
   const [itemList, setItemList] = useState({items: [
@@ -167,9 +185,15 @@ const gstCalculation = () =>{
           autoComplete="off"
         >
           <Stack spacing={2}>
-            <Typography sx={{ paddingTop: 5, paddingBottom: 5 }} variant="h4">
+            <Typography sx={{ paddingTop: 5, paddingBottom: 1 }} variant="h4">
               Add Purchase Order
             </Typography>
+            <Breadcrumbs sx={{  paddingBottom: 2}} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
             <Typography variant="h6">Vendor</Typography>
             <TextField
               id="vendor"

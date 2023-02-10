@@ -1,4 +1,5 @@
-import { Button, Card, CardActions, CardContent, Grid, Typography,Stack,Box,IconButton } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Grid, Typography,Stack,Box,IconButton,Breadcrumbs,Link } from "@mui/material";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import React from "react";
 import Page from "../../components/Page";
@@ -35,14 +36,22 @@ const Vendors = (props) => {
           },1000);
       })
   }}
- 
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Vendors
+    </Typography>,
+  ];
   const columns = [
    
     {
       field: "Supplier_code",
-      valueFormatter: ({value}) => value,
-      headerName: "Supplier Code",
-     
+      valueFormatter: ({value}) => 'V' + value,
+      headerName: "Vendor Code",
+      cellClassName: 'super-app-theme--cell',
       headerClassName: 'super-app-theme--header',
       flex: 0.7,
       // cellClassName: "name-column--cell",
@@ -85,21 +94,7 @@ const Vendors = (props) => {
         headerClassName: 'super-app-theme--header',
         flex: 1,
       },  
-     {/* {
-        headerName: "Actions", field: "action", flex:1,
-        renderCell: (params) => <div>
-            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
-  <EditIcon fontSize="small" />
-</IconButton>
-            
-<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
-  <DeleteIcon fontSize="small" />
-</IconButton>
-          
-        
-        </div>
-        
-      }, */}
+
      
        
   
@@ -117,9 +112,28 @@ const Vendors = (props) => {
       <Page title="Poorvika | Vendors">
       <Box sx={{boxShadow:20,padding:5,}}>
       <Stack direction="row" >
-       
+            {/* {
+        headerName: "Actions", field: "action", flex:1,
+        renderCell: (params) => <div>
+            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
+  <EditIcon fontSize="small" />
+</IconButton>
+            
+<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
+  <DeleteIcon fontSize="small" />
+</IconButton>
+          
+        
+        </div>
+        
+      }, */}
        <Typography variant="h5" color="initial"><Box sx={{ fontWeight: 'bold', m: 1 }}>Vendors Table</Box></Typography>
-        </Stack>  <Box
+        </Stack>  <Breadcrumbs sx={{  m: 1 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>  <Box
        height="80vh"  fontWeight={10}
         sx={{ 
           "& .MuiDataGrid-root": {
@@ -130,6 +144,11 @@ const Vendors = (props) => {
           },
           "& .name-column--cell": {
          
+          },
+          '& .super-app-theme--cell': {
+            //backgroundColor: 'primary',
+            color: '#1a3e72',
+            fontWeight: '600',
           },
           "& .MuiDataGrid-columnHeaders": {
            

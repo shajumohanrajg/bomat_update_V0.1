@@ -1,22 +1,37 @@
-import { Button, Card, CardActions, CardContent, Grid, Typography,Stack,Box,IconButton } from "@mui/material";
-import React from "react";
-import Page from "../../components/Page";
-import axios from "axios";
-import {createBrowserHistory} from 'history';
-import { SnackbarProvider,useSnackbar } from 'notistack';
-import { useEffect } from "react";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box, Breadcrumbs, Button, Link, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import axios from "axios";
+import { createBrowserHistory } from 'history';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import React, { useEffect } from "react";
+import Page from "../../components/Page";
 
 const Branches = (props) => {
-
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Branches
+    </Typography>,
+  ];
   const {enqueueSnackbar} = useSnackbar();
   const history = createBrowserHistory();
   const url="http://10.8.1.170:4545/api/v1/branches";
   const [branchData,setBranchData]= React.useState([]);
   const columns = [
-   
+    {
+      field: "id",
+      valueFormatter: ({value}) => 'B' + value,
+      headerName: "Branch ID",
+     
+      headerClassName: 'super-app-theme--header',
+      flex: 0.9,
+      // cellClassName: "name-column--cell",
+      cellClassName: 'super-app-theme--cell',
+    },
     {
       field: "name",
       valueFormatter: ({value}) => value,
@@ -64,21 +79,7 @@ const Branches = (props) => {
         headerClassName: 'super-app-theme--header',
         flex: 1,
       },  
-     {/* {
-        headerName: "Actions", field: "action", flex:1,
-        renderCell: (params) => <div>
-            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
-  <EditIcon fontSize="small" />
-</IconButton>
-            
-<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
-  <DeleteIcon fontSize="small" />
-</IconButton>
-          
-        
-        </div>
-        
-      },*/}
+   
      
        
   
@@ -113,15 +114,39 @@ const Branches = (props) => {
       <Page title="Poorvika | Branches">
          <Box sx={{boxShadow:20,padding:5,}}>
       <Stack direction="row" >
-       
+         {/* {
+        headerName: "Actions", field: "action", flex:1,
+        renderCell: (params) => <div>
+            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
+  <EditIcon fontSize="small" />
+</IconButton>
+            
+<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
+  <DeleteIcon fontSize="small" />
+</IconButton>
+          
+        
+        </div>
+        
+      },*/}
        <Typography variant="h5" color="initial"><Box sx={{ fontWeight: 'bold', m: 1 }}>Branches Table</Box></Typography>
-        </Stack>
+        </Stack> <Breadcrumbs sx={{  m: 1 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs> 
        <Box
         height="80vh"  fontWeight={10}
          sx={{ 
            "& .MuiDataGrid-root": {
              border: "none", 
            },
+           '& .super-app-theme--cell': {
+            //backgroundColor: 'primary',
+            color: '#1a3e72',
+            fontWeight: '600',
+          },
            "& .MuiDataGrid-cell": {
              borderBottom: "none",
            },

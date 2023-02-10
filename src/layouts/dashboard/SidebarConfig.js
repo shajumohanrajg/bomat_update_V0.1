@@ -41,6 +41,11 @@ const sidebarConfig = [
     path: '/dashboard/bomat_table1',
    icon: getIcon('eva:person-add-fill')
   },
+  //{
+  //  title: 'Bill Of Material',
+   // path: '/dashboard/bomat_table',
+   //icon: getIcon('eva:person-add-fill')
+ // },
   //   {
   //     title: 'register',
   //     path: '/register',

@@ -7,15 +7,33 @@ import {
   Divider,
   Container,
   Grid,
-  Stack,
+  Stack,Link,Breadcrumbs
 } from "@mui/material";
 import React, { useState } from "react";
 import Page from "../../components/Page";
 import { SnackbarProvider,useSnackbar } from 'notistack';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { createBrowserHistory } from 'history';
 
 const VAdd = () => {
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>,
+    <Link
+    underline="hover"
+    key="2"
+    color="inherit"
+    href="/dashboard/vendors"
+    
+  >
+    Vendors
+  </Link>,
 
+    <Typography key="3" color="text.primary">
+      Add Vendors
+    </Typography>,
+  ];
   const history= createBrowserHistory();
   const {enqueueSnackbar} = useSnackbar();
   const url="http://10.8.1.170:4545/api/v1/vendor"
@@ -66,6 +84,12 @@ const VAdd = () => {
         >
           <Stack spacing={5}>
             <Typography sx={{ paddingTop: 3, paddingLeft:3 }} variant="h4">Add Vendors</Typography>
+            <Breadcrumbs sx={{  paddingLeft:3}} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
             <Grid container spacing={3} sx={{ pr: 5 }}>
               <Grid item xs={12} md={6} xl={6}>
                 <TextField

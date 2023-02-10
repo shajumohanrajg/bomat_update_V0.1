@@ -6,11 +6,13 @@ import {
   CardContent,
   Grid,
   Container,
-  Typography,
+  Typography,Link,Breadcrumbs
 } from "@mui/material";
 import React, { useEffect } from "react";
 import Page from "../components/Page";
 import AppWidgetSummary from "../section/@dashboard/homepage/AppWidgetSummary";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+//import {Dashboard} from '@mui/icons-material'
 // import Axios from 'axios';
 
 const DashBoard = (props) => {
@@ -73,7 +75,15 @@ const DashBoard = (props) => {
     { field: "email", headerName: "Email", flex: 1 },
     // { field: "contact_reference", headerName: "Contact Reference", flex: 1 },
   ]
-
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Dashboard
+    </Typography>,
+  ];
   useEffect(() => {
     fetch("http://10.8.1.170:4545/api/v1/po_list")
       .then((data) => data.json())
@@ -124,6 +134,12 @@ const DashBoard = (props) => {
           <Typography sx={{ padding: 5 }} variant="h4">
             Dashboard
           </Typography>
+          <Breadcrumbs sx={{ paddingLeft: 5 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>

@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, Grid, Typography,Stack,Box,IconButton } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Grid, Typography,Stack,Box,IconButton,Breadcrumbs,Link } from "@mui/material";
 import { SnackbarProvider,useSnackbar } from "notistack";
 import React from "react";
 import {createBrowserHistory} from 'history';
@@ -8,6 +8,7 @@ import ViewIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Pdf from "react-to-pdf";
 import { PDFViewer } from '@react-pdf/renderer';
 //import MyDocument from "./purchase_order_pdf";
@@ -34,9 +35,26 @@ const Orders = (props) => {
       setPoData(res.data)
     });
   }, []);
-  
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>
+,
+    <Typography key="3" color="text.primary">
+      Purchase Order
+    </Typography>,
+  ];
   const columns = [
-   
+  {
+    field: "id",
+    valueFormatter: ({value}) =>'PO' +  value,
+    headerName: "Vendor Name",
+    cellClassName: 'super-app-theme--cell',
+    headerClassName: 'super-app-theme--header',
+    flex: 0.7,
+    // cellClassName: "name-column--cell",
+
+  },
     {
       field: "vendor",
       valueFormatter: ({value}) => value.name,
@@ -82,21 +100,7 @@ const Orders = (props) => {
         headerClassName: 'super-app-theme--header',
         flex: 1,
       }, 
-     {/* {
-        headerName: "Actions", field: "action", flex:1,
-        renderCell: (params) => <div>
-            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
-  <ViewIcon fontSize="small" />
-</IconButton>
-            
-<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
-  <DeleteIcon fontSize="small" />
-</IconButton>
-          
-        
-        </div>
-        
-      },*/}
+    
      
        
   
@@ -128,14 +132,39 @@ const Orders = (props) => {
       {/* <Pdf targetRef={ref} filename="code-example.pdf">
       {({ toPdf }) => <Button onClick={toPdf}>Generate Pdf</Button>}
   </Pdf>*/}
-  
+   {/* {
+        headerName: "Actions", field: "action", flex:1,
+        renderCell: (params) => <div>
+            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
+  <ViewIcon fontSize="small" />
+</IconButton>
+            
+<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
+  <DeleteIcon fontSize="small" />
+</IconButton>
+          
+        
+        </div>
+        
+      },*/}
   
        <Typography variant="h5" color="initial"><Box  sx={{ fontWeight: 'bold', m: 1 }}>Purchase Orders Table</Box></Typography>
-        </Stack>  <Box ref={ref}
+    
+        </Stack>    <Breadcrumbs sx={{  m: 1 }} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>  <Box ref={ref}
        height="80vh"  fontWeight={10}
         sx={{ 
           "& .MuiDataGrid-root": {
             border: "none", 
+          },
+          '& .super-app-theme--cell': {
+            //backgroundColor: 'primary',
+            color: '#1a3e72',
+            fontWeight: '600',
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",

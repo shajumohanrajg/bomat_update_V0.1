@@ -93,15 +93,16 @@ const EditionTable = (props) => {
    
     {
       field: "id",
-     
+      valueFormatter: ({value}) => 'E' + value,
       headerName: "ID",
-     
       headerClassName: 'super-app-theme--header',
       flex: 0.4,
       // cellClassName: "name-column--cell",
-
+      cellClassName: 'super-app-theme--cell',
     },
-   {
+    
+ 
+    {
       field: "edition",
       valueFormatter: ({value}) => value.edition,
       headerName: "Edition",
@@ -112,6 +113,7 @@ const EditionTable = (props) => {
       flex: 1,
       cellClassName: "name-column--cell",
     },
+ 
     {
       field: "district",
       valueFormatter: ({value}) => value.district,
@@ -123,41 +125,12 @@ const EditionTable = (props) => {
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    
+   
  
 
  
   
-  {/*    {
-        field: "material",
-        headerName: "Material",
-        headerClassName: 'super-app-theme--header',
-        flex: 1,
-      },
-
-  
-    {
-        field: "material_price",
-        headerName: "Material Price",
-        headerClassName: 'super-app-theme--header',
-        flex: 1,
-      }, 
-     {
-        headerName: "Actions", field: "action", flex:1,
-        renderCell: (params) => <div>
-            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
-  <EditIcon fontSize="small" />
-</IconButton>
-            
-<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
-  <DeleteIcon fontSize="small" />
-</IconButton>
-          
-        
-        </div>
-        
-      },*/}
-     
+ 
        
   
   
@@ -225,7 +198,36 @@ const EditionTable = (props) => {
 
   // console.log("test", edition)
   return (
-      <Box>
+      <Box> {/*    {
+        field: "material",
+        headerName: "Material",
+        headerClassName: 'super-app-theme--header',
+        flex: 1,
+      },
+
+  
+    {
+        field: "material_price",
+        headerName: "Material Price",
+        headerClassName: 'super-app-theme--header',
+        flex: 1,
+      }, 
+     {
+        headerName: "Actions", field: "action", flex:1,
+        renderCell: (params) => <div>
+            <IconButton aria-label="delete" color="success" size="large" onClick={() => updateVendor(params.id)}>
+  <EditIcon fontSize="small" />
+</IconButton>
+            
+<IconButton aria-label="delete" color="error" size="large" onClick={() => deleteVendor(params.id)}>
+  <DeleteIcon fontSize="small" />
+</IconButton>
+          
+        
+        </div>
+        
+      },*/}
+     
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
          
           {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
@@ -243,6 +245,11 @@ const EditionTable = (props) => {
            "& .MuiDataGrid-root": {
              border: "none", 
            },
+           '& .super-app-theme--cell': {
+            //backgroundColor: 'primary',
+            color: '#1a3e72',
+            fontWeight: '600',
+          },
            "& .MuiDataGrid-cell": {
              borderBottom: "none",
            },

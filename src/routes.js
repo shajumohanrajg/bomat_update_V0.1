@@ -60,14 +60,14 @@ export default function Router() {
               path: "profile/edit",
               element: <Team />,
             },
-            
-            {
-              path: "bomat",
-              element: <Bomat />,
-            },
+         
             {
               path: "bomat_table",
               element: <BomatTable />,
+            },
+            {
+              path: "bomat_add",
+              element: <Bomat />,
             },
             {
               path: "bomat_table1",
@@ -94,7 +94,7 @@ export default function Router() {
                element: <BomatUpdate3 />,
              },
              {
-              path: "bomat_update4:/id",
+              path: "bomat_update4/:id",
                element: <BomatUpdate4 />,
              },
             {
@@ -141,6 +141,7 @@ export default function Router() {
               path: "release_orders/add",
               element: <RAdd />,
             },
+          
             {
               path: "release_orders/update/:id",
               element: <RUpdate />,

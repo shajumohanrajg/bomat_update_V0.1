@@ -8,7 +8,7 @@ import {
   Typography,
   Container,
   Grid,
-  InputAdornment,
+  InputAdornment,Breadcrumbs,Link
 } from "@mui/material";
 // import { styled } from "@mui/material/styles";
 import React from "react";
@@ -22,6 +22,7 @@ import Axios from "axios";
 import { SnackbarProvider,useSnackbar } from 'notistack';
 import PercentIcon from "@mui/icons-material/Percent";
 import { createBrowserHistory } from "history";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 // const CustomPickersDay = styled(PickersDay, {
 //   shouldForwardProp: (prop) => prop !== "selected"
@@ -40,7 +41,24 @@ import { createBrowserHistory } from "history";
 // }));
 
 const RAdd = () => {
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>,
+    <Link
+    underline="hover"
+    key="2"
+    color="inherit"
+    href="/dashboard/ro"
+    
+  >
+    Ro
+  </Link>,
 
+    <Typography key="3" color="text.primary">
+     Ro Form
+    </Typography>,
+  ];
   const {enqueueSnackbar} = useSnackbar();
   const [ro_value, setRovalue] = React.useState([startOfDay(new Date())]);
   const history= createBrowserHistory();
@@ -266,6 +284,12 @@ const handleItemAdd = (e) => {
             <Typography sx={{ paddingTop: 5, paddingLeft: 3 }} variant="h4">
               Release Order Entry form
             </Typography>
+            <Breadcrumbs sx={{  paddingLeft:3}} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
             <Grid container spacing={3} sx={{ pr: 5 }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Grid item xs={12} md={6} xl={6}>

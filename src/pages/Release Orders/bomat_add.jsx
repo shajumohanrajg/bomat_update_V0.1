@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
   Container,
-  Grid,
+  Grid,Breadcrumbs,Link
 } from "@mui/material";
 
 // import { styled } from "@mui/material/styles";
@@ -20,6 +20,7 @@ import React from "react";
 import Page from "../../components/Page";
 import Axios from "axios";
 import { SnackbarProvider, useSnackbar } from "notistack";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 //import PercentIcon from "@mui/icons-material/Percent";
 import { createBrowserHistory } from "history";
 
@@ -40,6 +41,24 @@ import { createBrowserHistory } from "history";
 // }));
 
 const RAdd = () => {
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/dashboard/homepage">
+      Home
+    </Link>,
+    <Link
+    underline="hover"
+    key="2"
+    color="inherit"
+    href="/dashboard/bomat_table1/"
+    
+  >
+    Bomat
+  </Link>,
+
+    <Typography key="3" color="text.primary">
+     Bomat Form
+    </Typography>,
+  ];
   const { enqueueSnackbar } = useSnackbar();
 
   const history = createBrowserHistory();
@@ -82,7 +101,7 @@ const RAdd = () => {
           anchorOrigin: { horizontal: "right", vertical: "top" },
         });
         // console.log(response);
-        history.push("/dashboard/bomat_table");
+        history.push("/dashboard/bomat_table1");
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -102,9 +121,15 @@ const RAdd = () => {
       <Container maxWidth="xl">
         <Box component="form" pb="3" pr="3" noValidate autoComplete="off">
           <Stack spacing={5}>
-            <Typography sx={{ paddingTop: 5, paddingLeft: 3 }} variant="h4">
+            <Typography sx={{ paddingTop: 5, paddingLeft: 3 }} variant="h5">
               Bill Of Material form
             </Typography>
+            <Breadcrumbs sx={{  paddingLeft:3}} 
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
             <Grid container spacing={3} sx={{ pr: 5 }}>
               <Grid item xs={12} md={12} xl={12}>
                 <TextField
@@ -114,7 +139,7 @@ const RAdd = () => {
                   select
                   value={vendorValue}
                   onChange={(e) => setVendorValue(e.target.value)}
-                  variant="outlined"
+                  variant="outlined" 
                 >
                   {vendors.map((option) => (
                     <MenuItem key={option.id} value={option.name}>
@@ -132,7 +157,7 @@ const RAdd = () => {
                   type="text"
                   value={material}
                   onChange={(e) => setMaterial(e.target.value)}
-                  variant="outlined"
+                  variant="outlined" 
                 />
               </Grid>
 
